@@ -581,25 +581,14 @@
             </div>
             
             <div class="gallery-load-more reveal">
-                <button class="btn btn-secondary" id="load-more-gallery">
-                    <span>Afficher plus de photos</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <span class="gallery-counter" id="gallery-counter"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close"><i class="fas fa-times"></i></button>
-        <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
-        <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
-        <div class="lightbox-content">
-            <img src="" alt="" id="lightbox-img">
-            <div class="lightbox-caption" id="lightbox-caption"></div>
-        </div>
-    </div>
+				<button class="btn btn-secondary" id="load-more-gallery">
+					<span>Afficher plus de photos</span>
+					<i class="fas fa-chevron-down"></i>
+				</button>
+				<span class="gallery-counter" id="gallery-counter"></span>
+			</div>
+		</div>
+	</section>
 
     <!-- Rooms Section -->
     <section class="section rooms" id="chambres">
@@ -908,7 +897,7 @@
                 </div>
                 
                 <!-- Marchés locaux -->
-                <div class="activity-card reveal">
+                <div class="activity-card reveal" style="transition-delay: 0.4s;">
                     <div class="activity-image">
                         <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=600&h=400&fit=crop" alt="Marchés">
                     </div>
@@ -1186,6 +1175,7 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 
+    <link rel="stylesheet" href="css/fix-mobile-nav.css">
     <script src="js/main.js"></script>
 </body>
 </html>

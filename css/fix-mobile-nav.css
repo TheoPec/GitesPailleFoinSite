@@ -1,0 +1,53 @@
+/* Correctif menu mobile hamburger superposition/fond */
+@media (max-width: 992px) {
+  .nav-link {
+    color: var(--text);
+    padding: 14px 0 14px 0;
+    width: 100%;
+    border: none;
+    background: none !important;
+    font-size: 1.15rem;
+    text-align: left;
+    border-radius: 0;
+    margin: 0;
+    position: relative;
+    font-weight: 400;
+  }
+  .nav-menu li {
+    margin-bottom: 2.2rem !important;
+  }
+  .nav-menu li:last-child {
+    margin-bottom: 0 !important;
+  }
+  .nav-link:hover {
+    color: var(--primary);
+    background: none !important;
+  }
+  .nav-link.active {
+    color: var(--primary);
+    background: none !important;
+    font-weight: 700;
+  }
+  .nav-link.nav-cta {
+    margin-left: 0;
+    margin-top: 18px;
+    width: auto;
+    min-width: 120px;
+    text-align: center;
+    background: #f5e9c7 !important;
+    color: #7a5c1c !important;
+    border-radius: 2.2rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px rgba(122,92,28,0.07) !important;
+    padding: 0.7rem 1.5rem !important;
+    position: relative;
+    z-index: 1;
+  }
+  .nav-link.nav-cta:hover {
+    background: var(--primary-dark) !important;
+    color: var(--white) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 105, 20, 0.3);
+  }
+}

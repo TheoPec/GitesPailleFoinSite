@@ -442,3 +442,27 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ----- Mobile Optimizations ----- */
+@media (max-width: 576px) {
+    .fade-in {
+        transform: translateY(15px);
+    }
+    
+    .reveal {
+        transform: translateY(20px);
+    }
+    
+    .reveal-left,
+    .reveal-right {
+        transform: translateX(0);
+        transform: translateY(20px);
+    }
+    
+    /* Désactiver les animations qui causent un débordement */
+    .float,
+    .pulse,
+    .shake {
+        animation: none;
+    }
+}
