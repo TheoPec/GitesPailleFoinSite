@@ -721,12 +721,12 @@ section {
 
 .discover-images {
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* allow overlapping secondary image and badge to show */
 }
 
 .image-stack {
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* allow decorative images to overflow container */
 }
 
 .image-card {
@@ -750,15 +750,21 @@ section {
 .image-card.main {
     width: 100%;
     height: 500px;
+    position: relative;
+    z-index: 1;
+    /* stronger shadow to better lift the facade image */
+    box-shadow: 0 40px 90px rgba(10,10,10,0.28), 0 12px 30px rgba(10,10,10,0.12);
 }
 
 .image-card.secondary {
     position: absolute;
-    bottom: -40px;
-    left: -60px;
-    width: 200px;
-    height: 150px;
-    border: 5px solid var(--white);
+    bottom: -26px;
+    left: -30px;
+    width: 220px;
+    height: 160px;
+    border: none; /* remove white border around garden secondary image */
+    z-index: 2; /* bring above main image */
+    box-shadow: var(--shadow-md);
 }
 
 .image-overlay {
@@ -775,14 +781,15 @@ section {
 
 .experience-badge {
     position: absolute;
-    top: 30px;
-    right: -30px;
+    top: 24px;
+    right: -60px; /* shift badge left */
     background: var(--primary);
     color: var(--white);
-    padding: 20px;
+    padding: 16px 18px;
     border-radius: var(--radius-md);
     text-align: center;
     box-shadow: var(--shadow-lg);
+    z-index: 3; /* ensure it's above images */
 }
 
 .exp-number {
@@ -2674,11 +2681,11 @@ section {
     .image-card.secondary {
         display: none;
     }
-    
+
     .experience-badge {
-        right: 10px;
+        right: 20px; /* slightly left-shifted on mobile */
         top: 20px;
-        padding: 15px;
+        padding: 12px 14px;
     }
     
     .exp-number {
