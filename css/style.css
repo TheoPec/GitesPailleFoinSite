@@ -268,6 +268,7 @@ ul {
     gap: 5px;
     cursor: pointer;
     padding: 10px;
+    z-index: 1001;
 }
 
 .nav-toggle span {
@@ -276,6 +277,20 @@ ul {
     background: var(--white);
     border-radius: 3px;
     transition: var(--transition-base);
+    transform-origin: center;
+}
+
+/* Hamburger animation when active */
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
 }
 
 .navbar.scrolled .nav-toggle span {
@@ -2260,7 +2275,7 @@ ul {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 300px;
+        width: 280px;
         height: 100vh;
         background: var(--white);
         flex-direction: column;
@@ -2268,16 +2283,37 @@ ul {
         padding: 100px 30px 30px;
         transition: var(--transition-base);
         box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        overflow-y: auto;
     }
     
     .nav-menu.active {
         right: 0;
     }
     
+    /* Overlay when menu is open */
+    .nav-menu.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+    
     .nav-link {
         color: var(--text);
         padding: 15px 0;
         width: 100%;
+        border-bottom: 1px solid var(--cream-dark);
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--primary);
+        background: transparent;
     }
     
     .nav-link.nav-cta {
@@ -2350,7 +2386,7 @@ ul {
 
 @media (max-width: 768px) {
     .amenities-wrapper {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
     
     .rooms-slider {
@@ -2390,6 +2426,10 @@ ul {
         gap: 30px;
     }
     
+    .testimonials-slider {
+        grid-template-columns: 1fr;
+    }
+    
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -2408,15 +2448,121 @@ ul {
         top: auto;
         transform: none;
     }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto 60px;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .activity-card.large {
+        grid-column: span 2;
+    }
 }
 
 @media (max-width: 576px) {
-    .amenities-wrapper {
-        grid-template-columns: 1fr;
+    :root {
+        --section-padding: 60px;
     }
     
+    .container {
+        padding: 0 16px;
+    }
+    
+    /* Hero mobile */
+    .hero-content {
+        padding: 0 16px;
+    }
+    
+    .hero-badge {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+    }
+    
+    .title-line {
+        font-size: 0.9rem;
+        letter-spacing: 0.15em;
+    }
+    
+    .title-main {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+    
+    .title-location {
+        font-size: 1.1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .scroll-indicator {
+        display: none;
+    }
+    
+    /* Section headers mobile */
+    .section-header {
+        margin-bottom: 40px;
+    }
+    
+    .section-tag {
+        font-size: 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Amenities mobile */
+    .amenities-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .amenity-card {
+        padding: 20px 12px;
+    }
+    
+    .amenity-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .amenity-card h4 {
+        font-size: 0.85rem;
+    }
+    
+    .amenity-card p {
+        font-size: 0.75rem;
+    }
+    
+    /* Gallery mobile */
     .gallery-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
     
     .gallery-item.wide {
@@ -2429,8 +2575,19 @@ ul {
         height: 250px;
     }
     
+    .gallery-filters {
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+    
+    /* Activities mobile */
     .activities-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
     }
     
     .activity-card.large {
@@ -2441,18 +2598,35 @@ ul {
         grid-template-columns: 1fr;
     }
     
+    /* Buttons mobile */
     .hero-buttons {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        gap: 12px;
     }
     
     .btn {
         width: 100%;
         justify-content: center;
+        padding: 14px 24px;
     }
     
-    .contact-form-wrapper {
-        padding: 30px 20px;
+    /* Discover mobile */
+    .discover-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .features-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .feature-item {
+        padding: 16px;
+    }
+    
+    .image-card.main {
+        height: 300px;
     }
     
     .image-card.secondary {
@@ -2460,6 +2634,214 @@ ul {
     }
     
     .experience-badge {
+        right: 10px;
+        top: 20px;
+        padding: 15px;
+    }
+    
+    .exp-number {
+        font-size: 1.5rem;
+    }
+    
+    /* Gîtes mobile */
+    .gite-content {
+        padding: 24px 20px;
+    }
+    
+    .gite-title {
+        font-size: 1.5rem;
+    }
+    
+    .gite-features {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .gite-feature i {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .gite-amenities {
+        gap: 8px;
+    }
+    
+    .gite-amenities span {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    .price-amount {
+        font-size: 2rem;
+    }
+    
+    .gite-buttons {
+        flex-direction: column;
+    }
+    
+    .both-gites {
+        padding: 30px 20px;
+    }
+    
+    /* Rooms mobile */
+    .room-card {
+        padding: 24px 20px;
+    }
+    
+    /* Equipment mobile */
+    .equipment-category {
+        padding: 20px;
+    }
+    
+    .equipment-header h3 {
+        font-size: 1rem;
+    }
+    
+    /* Testimonials mobile */
+    .testimonial-card {
+        padding: 24px 20px;
+        min-height: auto;
+    }
+    
+    .testimonial-text {
+        font-size: 0.95rem;
+    }
+    
+    .testimonials-stats {
+        gap: 40px;
+    }
+    
+    .tstat-number {
+        font-size: 2rem;
+    }
+    
+    /* Contact mobile */
+    .contact-form-wrapper {
+        padding: 24px 16px;
+    }
+    
+    .contact-info-card {
+        padding: 20px;
+    }
+    
+    .contact-form h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Footer mobile */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-brand p {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links h4,
+    .footer-contact h4 {
+        margin-bottom: 16px;
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    /* Map mobile */
+    .map-overlay-card {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        padding: 20px;
+    }
+    
+    /* Lightbox mobile */
+    .lightbox-prev,
+    .lightbox-next {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .lightbox-prev {
+        left: 5px;
+    }
+    
+    .lightbox-next {
+        right: 5px;
+    }
+    
+    /* Back to top mobile */
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
         right: 20px;
+    }
+}
+
+/* ----- Extra Small Screens (< 400px) ----- */
+@media (max-width: 400px) {
+    .amenities-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .amenity-card {
+        padding: 15px 8px;
+    }
+    
+    .amenity-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .amenity-card h4 {
+        font-size: 0.75rem;
+    }
+    
+    .amenity-card p {
+        display: none;
+    }
+    
+    .title-main {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .gite-badge {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+    }
+    
+    .gite-coming-soon,
+    .gite-available {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+    }
+    
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+    
+    .logo-svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .filter-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
     }
 }
